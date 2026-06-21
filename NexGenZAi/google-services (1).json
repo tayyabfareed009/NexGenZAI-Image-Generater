@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "593335424358",
+    "project_id": "water-reminder-bd879",
+    "storage_bucket": "water-reminder-bd879.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593335424358:android:d50c63799aa1a46b8724a7",
+        "android_client_info": {
+          "package_name": "com.expo.water_reminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593335424358-kmrqk0ep5im1s3jetgb3q7s30dg32fje.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpxGQX66ZvCnC4GeDo6R1KODbtsC1818I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593335424358-gre6ont4n9o4m8e21pj325ol66uglopv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593335424358:android:ae549ee91142e20f8724a7",
+        "android_client_info": {
+          "package_name": "com.tayyabfareed.nexgenzai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593335424358-kmrqk0ep5im1s3jetgb3q7s30dg32fje.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpxGQX66ZvCnC4GeDo6R1KODbtsC1818I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593335424358-gre6ont4n9o4m8e21pj325ol66uglopv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
