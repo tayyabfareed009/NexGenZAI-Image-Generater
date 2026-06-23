@@ -1,10 +1,17 @@
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
-import { GoogleAuthProvider, onAuthStateChanged, signInWithCredential, signOut } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithCredential,
+  signInWithEmailAndPassword,
+  signOut
+} from 'firebase/auth';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { auth } from '../../config/firebase';
-import { registerAuthTokenGetter } from '../api/client';
 import { syncGoogleUser } from '../api/auth';
+import { registerAuthTokenGetter } from '../api/client';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -30,7 +37,6 @@ export function AuthProvider({ children }) {
     if (!auth.currentUser) {
       throw new Error('You must be logged in to continue.');
     }
-
     return auth.currentUser.getIdToken(forceRefresh);
   }
 
@@ -47,7 +53,6 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setFirebaseUser(user);
-
       try {
         if (user) {
           await syncUserWithBackend();
@@ -82,7 +87,7 @@ export function AuthProvider({ children }) {
 
       try {
         const credential = GoogleAuthProvider.credential(idToken, accessToken);
-        const result = await signInWithCredential(auth, credential);
+        await signInWithCredential(auth, credential);
         await syncUserWithBackend();
       } finally {
         setAuthLoading(false);
@@ -99,9 +104,38 @@ export function AuthProvider({ children }) {
     if (!request) {
       throw new Error('Google login is not ready yet. Please try again in a moment.');
     }
-
     setAuthError('');
     await promptAsync();
+  }
+
+  // New Feature: Email and Password Login
+  async function loginWithEmail(email, password) {
+    setAuthLoading(true);
+    setAuthError('');
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // onAuthStateChanged handles the automatic syncUserWithBackend call
+    } catch (error) {
+      setAuthError(error.message || 'Login failed.');
+      throw error;
+    } finally {
+      setAuthLoading(false);
+    }
+  }
+
+  // New Feature: Email and Password Sign Up
+  async function signUpWithEmail(email, password) {
+    setAuthLoading(true);
+    setAuthError('');
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      // onAuthStateChanged handles the automatic syncUserWithBackend call
+    } catch (error) {
+      setAuthError(error.message || 'Registration failed.');
+      throw error;
+    } finally {
+      setAuthLoading(false);
+    }
   }
 
   async function logout() {
@@ -122,6 +156,8 @@ export function AuthProvider({ children }) {
       authLoading,
       authError,
       loginWithGoogle,
+      loginWithEmail,  // Added to Context Value
+      signUpWithEmail, // Added to Context Value
       logout,
       getFirebaseIdToken
     }),
@@ -133,10 +169,8 @@ export function AuthProvider({ children }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-
   if (!context) {
     throw new Error('useAuth must be used inside AuthProvider.');
   }
-
   return context;
 }
