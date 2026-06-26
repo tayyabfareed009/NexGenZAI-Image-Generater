@@ -384,7 +384,7 @@ async function startServer() {
         console.log(`Server running on port ${PORT}`);
       });
     }
-    module.exports = app; // Export it so Vercel can consume itdule.exports = app; // Export it so Vercel can consume it
+    // Export it so Vercel can consume itdule.exports = app; // Export it so Vercel can consume it
     } 
   }
   catch (error) {
@@ -478,3 +478,4 @@ app.get('/api/test/gemini', (req, res) => {
 // gemini: !!process.env.GEMINI_API_KEY
 
 startServer();
+ module.exports = app;
