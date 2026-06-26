@@ -378,10 +378,16 @@ async function startServer() {
     mongoose.set('strictQuery', true);
     await mongoose.connect(requireEnv('MONGODB_URI'));
     console.log("✅ MongoDB Connected");
-    app.listen(PORT, '0.0.0.0', () => {
-      console.log(`AI Image Generator API running on http://0.0.0.0:${PORT}`);
-    });
-  } catch (error) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production') {
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+      });
+    }
+    module.exports = app; // Export it so Vercel can consume itdule.exports = app; // Export it so Vercel can consume it
+    } 
+  }
+  catch (error) {
     console.error('Failed to start server:', error.message);
     process.exit(1);
   }
