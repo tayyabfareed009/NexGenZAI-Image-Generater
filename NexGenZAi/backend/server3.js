@@ -329,7 +329,7 @@ app.post('/api/images/generate', authenticateFirebaseUser, async (req, res) => {
       prompt,
       imageUrl: uploaded.imageUrl,
       cloudinaryPublicId: uploaded.publicId,
-      provider: 'gemini', // Updated provider name
+      provider: 'pollinations', // Updated provider name
       model: generated.model
     });
 
@@ -379,7 +379,7 @@ async function startServer() {
     await mongoose.connect(requireEnv('MONGODB_URI'));
     console.log("✅ MongoDB Connected");
   if (process.env.NODE_ENV !== 'production') {
-    if (process.env.NODE_ENV !== 'production') {
+    if (!process.env.VERCEL){
       app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
       });

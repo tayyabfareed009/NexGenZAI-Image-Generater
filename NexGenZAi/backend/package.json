@@ -27,7 +27,7 @@
     "expo-web-browser": "~56.0.5",
     "express": "^5.2.1",
     "firebase": "^12.15.0",
-    "firebase-admin": "^14.0.0",
+    "firebase-admin": "^13.5.0",
     "mongoose": "^9.7.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
