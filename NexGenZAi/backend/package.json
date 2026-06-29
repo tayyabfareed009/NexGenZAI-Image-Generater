@@ -1,5 +1,5 @@
 {
-  "name": "ai-image-generator-backend",
+  "name": "nexgenzai",
   "version": "1.0.0",
   "description": "Backend server for AI image generator",
   "main": "server.js",
